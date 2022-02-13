@@ -52,13 +52,14 @@ public class BoardHelpersTests {
 
         boards.deleteBoard(boardID);
         Assertions.assertEquals(HttpStatus.SC_OK, boards.getLastResponseStatusCode());
-        try {
+       // try {
             boards.getBoardName(boardID);
-        } catch (JsonPathException e) {
+        //} catch (JsonPathException e) {
                //tu moze nic nie byc - chcemy tylko, zeby exception nie przelecial wyzej
-        }  finally {
+          //  System.out.println("Ha zlapalem wyjatek!");
+        //}  finally {
             Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, boards.getLastResponseStatusCode());
-        }
+        //}
 
         //Assertions.assertEquals(HttpStatus.SC_NOT_FOUND,boards.getBoardStatusCode(boardID));
     }

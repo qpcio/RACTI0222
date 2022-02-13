@@ -1,6 +1,7 @@
 package Helpers;
 
 import io.restassured.http.ContentType;
+import io.restassured.path.json.exception.JsonPathException;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.*;
@@ -30,10 +31,16 @@ public class Boards {
     public String getBoardName(String id) {
         lastResponse =  when()
                 .get(boardsAPIpath + id);
-        return lastResponse
-                .body()
-                .jsonPath()
-                .get("name");
+        String result;
+        try {
+            result = lastResponse
+                    .body()
+                    .jsonPath()
+                    .get("name");
+        } catch (JsonPathException e){
+            result = "";
+        }
+        return result;
     }
 
     public void changeBoardName(String id, String newName) {
@@ -46,6 +53,7 @@ public class Boards {
     public void deleteBoard(String id) {
         lastResponse = delete(boardsAPIpath + id);
     }
+
 
     @Deprecated
     public int getBoardStatusCode(String id) {
