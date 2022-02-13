@@ -13,7 +13,14 @@ public class Boards {
     private final String boardsAPIpath = "boards/";
     private Response lastResponse;
 
-    public int getLastResponseStatusCode(){
+    public Boards() {
+        baseURI = this.baseUri;
+        requestSpecification = given().queryParam("token", token)
+                .queryParam("key", key)
+                .contentType(ContentType.JSON);
+    }
+
+    public int getLastResponseStatusCode() {
         return lastResponse.statusCode();
     }
 
@@ -29,7 +36,7 @@ public class Boards {
     }
 
     public String getBoardName(String id) {
-        lastResponse =  when()
+        lastResponse = when()
                 .get(boardsAPIpath + id);
         String result;
         try {
@@ -37,7 +44,7 @@ public class Boards {
                     .body()
                     .jsonPath()
                     .get("name");
-        } catch (JsonPathException e){
+        } catch (JsonPathException e) {
             result = "";
         }
         return result;
@@ -60,11 +67,5 @@ public class Boards {
         return get(boardsAPIpath + id).statusCode();
     }
 
-    public Boards() {
-        baseURI = this.baseUri;
-        requestSpecification = given().queryParam("token", token)
-                .queryParam("key", key)
-                .contentType(ContentType.JSON);
-    }
 
 }

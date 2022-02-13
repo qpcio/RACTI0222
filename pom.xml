@@ -60,5 +60,14 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>5.0.0-RC2</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 </project>
